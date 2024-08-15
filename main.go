@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 
@@ -70,7 +71,7 @@ func getCodeHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     "code",
 		Value:    uuidV4.String(),
-		Domain:   ".abc.com",
+		Domain:   os.Getenv("DOMAIN"),
 		Path:     "/",
 		Expires:  time.Now().Add(365 * 24 * time.Hour),
 		HttpOnly: false,
